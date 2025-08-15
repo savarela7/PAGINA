@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizaciones - GlobalTrade Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html" class="breadcrumb-item">🏠 Dashboard</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">💰 Cotizaciones</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header de la página -->
+            <section class="page-header">
+                <div class="page-title-section">
+                    <h1>💰 Sistema de Cotizaciones</h1>
+                    <p>Calcula costos de envío y solicita cotizaciones personalizadas</p>
+                </div>
+                <div class="page-actions">
+                    <button class="action-btn primary" onclick="showModal('newQuote')">
+                        <span>➕ Nueva Cotización</span>
+                    </button>
+                    <button class="action-btn secondary" onclick="exportQuotes()">
+                        <span>📤 Exportar</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Calculadora de costos -->
+            <section class="cost-calculator">
+                <div class="calculator-container">
+                    <h3>🧮 Calculadora de Costos</h3>
+                    <div class="calculator-form">
+                        <div class="form-section">
+                            <h4>📍 Origen y Destino</h4>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Desde</label>
+                                    <select id="originCountry" onchange="updateCities('origin')">
+                                        <option value="">Seleccionar país</option>
+                                        <option value="china">🇨🇳 China</option>
+                                        <option value="usa">🇺🇸 Estados Unidos</option>
+                                        <option value="germany">🇩🇪 Alemania</option>
+                                        <option value="japan">🇯🇵 Japón</option>
+                                        <option value="brazil">🇧🇷 Brasil</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Ciudad origen</label>
+                                    <select id="originCity">
+                                        <option value="">Seleccionar ciudad</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Hasta</label>
+                                    <select id="destCountry" onchange="updateCities('dest')">
+                                        <option value="">Seleccionar país</option>
+                                        <option value="ecuador">🇪🇨 Ecuador</option>
+                                        <option value="colombia">🇨🇴 Colombia</option>
+                                        <option value="peru">🇵🇪 Perú</option>
+                                        <option value="chile">🇨🇱 Chile</option>
+                                        <option value="mexico">🇲🇽 México</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>Ciudad destino</label>
+                                    <select id="destCity">
+                                        <option value="">Seleccionar ciudad</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4>📦 Detalles de la Carga</h4>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>⚖️ Peso (kg)</label>
+                                    <input type="number" id="weight" placeholder="0.00" min="0" step="0.01" onchange="calculateCost()">
+                                </div>
+                                <div class="input-group">
+                                    <label>📏 Largo (cm)</label>
+                                    <input type="number" id="length" placeholder="0" min="0" onchange="calculateCost()">
+                                </div>
+                                <div class="input-group">
+                                    <label>📐 Ancho (cm)</label>
+                                    <input type="number" id="width" placeholder="0" min="0" onchange="calculateCost()">
+                                </div>
+                                <div class="input-group">
+                                    <label>📏 Alto (cm)</label>
+                                    <input type="number" id="height" placeholder="0" min="0" onchange="calculateCost()">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>📋 Tipo de mercancía</label>
+                                    <select id="cargoType" onchange="calculateCost()">
+                                        <option value="">Seleccionar tipo</option>
+                                        <option value="general">📦 Carga general</option>
+                                        <option value="fragile">🔍 Frágil</option>
+                                        <option value="dangerous">⚠️ Peligrosa</option>
+                                        <option value="perishable">🧊 Perecedera</option>
+                                        <option value="valuable">💎 Valiosa</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label>💰 Valor declarado (USD)</label>
+                                    <input type="number" id="declaredValue" placeholder="0.00" min="0" step="0.01" onchange="calculateCost()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4>🚚 Opciones de Transporte</h4>
+                            <div class="transport-options">
+                                <label class="transport-option">
+                                    <input type="radio" name="transport" value="maritime" onchange="calculateCost()">
+                                    <div class="option-content">
+                                        <div class="option-icon">🚢</div>
+                                        <div class="option-info">
+                                            <div class="option-title">Marítimo</div>
+                                            <div class="option-desc">15-30 días • Más económico</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="transport-option">
+                                    <input type="radio" name="transport" value="aerial" onchange="calculateCost()">
+                                    <div class="option-content">
+                                        <div class="option-icon">✈️</div>
+                                        <div class="option-info">
+                                            <div class="option-title">Aéreo</div>
+                                            <div class="option-desc">3-7 días • Más rápido</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="transport-option">
+                                    <input type="radio" name="transport" value="terrestrial" onchange="calculateCost()">
+                                    <div class="option-content">
+                                        <div class="option-icon">🚛</div>
+                                        <div class="option-info">
+                                            <div class="option-title">Terrestre</div>
+                                            <div class="option-desc">5-15 días • Regional</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="transport-option">
+                                    <input type="radio" name="transport" value="express" onchange="calculateCost()">
+                                    <div class="option-content">
+                                        <div class="option-icon">⚡</div>
+                                        <div class="option-info">
+                                            <div class="option-title">Express</div>
+                                            <div class="option-desc">1-3 días • Premium</div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4>🛡️ Servicios Adicionales</h4>
+                            <div class="additional-services">
+                                <label class="service-checkbox">
+                                    <input type="checkbox" id="insurance" onchange="calculateCost()">
+                                    <span class="checkmark"></span>
+                                    <div class="service-info">
+                                        <div class="service-title">🛡️ Seguro de carga</div>
+                                        <div class="service-desc">Protección contra pérdidas y daños</div>
+                                    </div>
+                                </label>
+                                <label class="service-checkbox">
+                                    <input type="checkbox" id="tracking" onchange="calculateCost()">
+                                    <span class="checkmark"></span>
+                                    <div class="service-info">
+                                        <div class="service-title">📱 Tracking premium</div>
+                                        <div class="service-desc">Seguimiento en tiempo real</div>
+                                    </div>
+                                </label>
+                                <label class="service-checkbox">
+                                    <input type="checkbox" id="packaging" onchange="calculateCost()">
+                                    <span class="checkmark"></span>
+                                    <div class="service-info">
+                                        <div class="service-title">📦 Embalaje especial</div>
+                                        <div class="service-desc">Protección adicional</div>
+                                    </div>
+                                </label>
+                                <label class="service-checkbox">
+                                    <input type="checkbox" id="customs" onchange="calculateCost()">
+                                    <span class="checkmark"></span>
+                                    <div class="service-info">
+                                        <div class="service-title">🏢 Gestión aduanera</div>
+                                        <div class="service-desc">Trámites incluidos</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resultado de la cotización -->
+            <section class="quote-result" id="quoteResult">
+                <div class="result-container">
+                    <h3>💰 Resultado de la Cotización</h3>
+                    <div class="cost-breakdown" id="costBreakdown">
+                        <div class="cost-summary">
+                            <div class="total-cost">
+                                <div class="cost-label">Costo Total</div>
+                                <div class="cost-amount" id="totalCost">$0.00</div>
+                            </div>
+                            <div class="cost-details" id="costDetails">
+                                <!-- Los detalles se generarán dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="quote-actions">
+                            <button class="btn-primary" onclick="saveQuote()">💾 Guardar Cotización</button>
+                            <button class="btn-secondary" onclick="sendQuote()">📧 Enviar por Email</button>
+                            <button class="btn-secondary" onclick="printQuote()">🖨️ Imprimir</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Historial de cotizaciones -->
+            <section class="quotes-history">
+                <div class="section-header">
+                    <h3>📋 Historial de Cotizaciones</h3>
+                    <div class="filter-options">
+                        <select id="statusFilter" onchange="filterQuotes()">
+                            <option value="">Todos los estados</option>
+                            <option value="pending">⏳ Pendiente</option>
+                            <option value="approved">✅ Aprobada</option>
+                            <option value="rejected">❌ Rechazada</option>
+                            <option value="expired">⏰ Expirada</option>
+                        </select>
+                        <select id="periodFilter" onchange="filterQuotes()">
+                            <option value="">Todos los períodos</option>
+                            <option value="today">Hoy</option>
+                            <option value="week">Esta semana</option>
+                            <option value="month">Este mes</option>
+                            <option value="year">Este año</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="quotes-grid">
+                    <div class="quote-card" data-status="pending">
+                        <div class="card-header">
+                            <div class="quote-id">COT-2024-001</div>
+                            <div class="quote-status pending">⏳ Pendiente</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span>🇨🇳 Shanghai</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span>🇪🇨 Guayaquil</span>
+                                </div>
+                            </div>
+                            <div class="quote-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>Importaciones Global S.A.</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>2,500 kg</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>🚚 Transporte:</span>
+                                    <span>🚢 Marítimo</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 Fecha:</span>
+                                    <span>15 Dic 2024</span>
+                                </div>
+                            </div>
+                            <div class="quote-cost">
+                                <div class="cost-label">Costo Total:</div>
+                                <div class="cost-value">$3,450.00</div>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small view" onclick="viewQuote('COT-2024-001')">👁️ Ver</button>
+                            <button class="btn-small edit" onclick="editQuote('COT-2024-001')">✏️ Editar</button>
+                            <button class="btn-small send" onclick="sendQuoteEmail('COT-2024-001')">📧 Enviar</button>
+                        </div>
+                    </div>
+
+                    <div class="quote-card" data-status="approved">
+                        <div class="card-header">
+                            <div class="quote-id">COT-2024-002</div>
+                            <div class="quote-status approved">✅ Aprobada</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span>🇺🇸 Miami</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span>🇪🇨 Quito</span>
+                                </div>
+                            </div>
+                            <div class="quote-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>TechCorp Ecuador</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>850 kg</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>🚚 Transporte:</span>
+                                    <span>✈️ Aéreo</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 Fecha:</span>
+                                    <span>12 Dic 2024</span>
+                                </div>
+                            </div>
+                            <div class="quote-cost">
+                                <div class="cost-label">Costo Total:</div>
+                                <div class="cost-value">$2,180.00</div>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small view" onclick="viewQuote('COT-2024-002')">👁️ Ver</button>
+                            <button class="btn-small create" onclick="createShipment('COT-2024-002')">📦 Crear Envío</button>
+                            <button class="btn-small invoice" onclick="generateInvoice('COT-2024-002')">🧾 Facturar</button>
+                        </div>
+                    </div>
+
+                    <div class="quote-card" data-status="expired">
+                        <div class="card-header">
+                            <div class="quote-id">COT-2024-003</div>
+                            <div class="quote-status expired">⏰ Expirada</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span>🇵🇪 Lima</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span>🇨🇴 Bogotá</span>
+                                </div>
+                            </div>
+                            <div class="quote-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>Textiles Andinos Ltda.</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>1,200 kg</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>🚚 Transporte:</span>
+                                    <span>🚛 Terrestre</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 Fecha:</span>
+                                    <span>08 Dic 2024</span>
+                                </div>
+                            </div>
+                            <div class="quote-cost">
+                                <div class="cost-label">Costo Total:</div>
+                                <div class="cost-value">$1,890.00</div>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small view" onclick="viewQuote('COT-2024-003')">👁️ Ver</button>
+                            <button class="btn-small renew" onclick="renewQuote('COT-2024-003')">🔄 Renovar</button>
+                            <button class="btn-small archive" onclick="archiveQuote('COT-2024-003')">📁 Archivar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/quotes.js"></script>
+</body>
+</html>
+

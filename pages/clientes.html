@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - GlobalTrade Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👥</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html" class="breadcrumb-item">🏠 Dashboard</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">👥 Clientes</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header de la página -->
+            <section class="page-header">
+                <div class="page-title-section">
+                    <h1>👥 Gestión de Clientes</h1>
+                    <p>Administra tu cartera de clientes y sus datos de contacto</p>
+                </div>
+                <div class="page-actions">
+                    <button class="action-btn primary" onclick="showModal('newClient')">
+                        <span>➕ Nuevo Cliente</span>
+                    </button>
+                    <button class="action-btn secondary" onclick="exportClients()">
+                        <span>📤 Exportar</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Filtros y búsqueda -->
+            <section class="filters-section">
+                <div class="search-bar">
+                    <input type="text" id="clientSearch" placeholder="🔍 Buscar clientes..." onkeyup="filterClients()">
+                </div>
+                <div class="filter-options">
+                    <select id="typeFilter" onchange="filterClients()">
+                        <option value="">Todos los tipos</option>
+                        <option value="corporativo">🏢 Corporativo</option>
+                        <option value="pyme">🏪 PYME</option>
+                        <option value="individual">👤 Individual</option>
+                        <option value="government">🏛️ Gubernamental</option>
+                    </select>
+                    <select id="countryFilter" onchange="filterClients()">
+                        <option value="">Todos los países</option>
+                        <option value="ecuador">🇪🇨 Ecuador</option>
+                        <option value="colombia">🇨🇴 Colombia</option>
+                        <option value="peru">🇵🇪 Perú</option>
+                        <option value="brazil">🇧🇷 Brasil</option>
+                        <option value="mexico">🇲🇽 México</option>
+                    </select>
+                    <select id="statusFilter" onchange="filterClients()">
+                        <option value="">Todos los estados</option>
+                        <option value="active">✅ Activo</option>
+                        <option value="inactive">⏸️ Inactivo</option>
+                        <option value="pending">⏳ Pendiente</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Estadísticas de clientes -->
+            <section class="client-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-number">247</div>
+                            <div class="stat-label">Total Clientes</div>
+                            <div class="stat-trend positive">+15 este mes</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <div class="stat-number">231</div>
+                            <div class="stat-label">Activos</div>
+                            <div class="stat-trend positive">93.5%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏢</div>
+                        <div class="stat-content">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Corporativos</div>
+                            <div class="stat-trend positive">63.2%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-content">
+                            <div class="stat-number">23</div>
+                            <div class="stat-label">Países</div>
+                            <div class="stat-trend positive">+2 nuevos</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de clientes -->
+            <section class="clients-list">
+                <div class="section-header">
+                    <h3>Directorio de Clientes</h3>
+                    <div class="view-options">
+                        <button class="view-btn active" onclick="switchView('table')">📋 Tabla</button>
+                        <button class="view-btn" onclick="switchView('cards')">🗂️ Tarjetas</button>
+                    </div>
+                </div>
+
+                <!-- Vista de tabla -->
+                <div id="tableView" class="clients-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>País</th>
+                                <th>Contacto</th>
+                                <th>Envíos</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientsTableBody">
+                            <tr data-type="corporativo" data-country="ecuador" data-status="active">
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">🏢</div>
+                                        <div>
+                                            <strong>Importaciones Global S.A.</strong>
+                                            <div class="client-id">ID: CLI-001</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="type-badge corporativo">🏢 Corporativo</span></td>
+                                <td>🇪🇨 Ecuador</td>
+                                <td>
+                                    <div>📧 contacto@global.com</div>
+                                    <div>📞 +593 2 123-4567</div>
+                                </td>
+                                <td><span class="shipment-count">47</span></td>
+                                <td><span class="status active">✅ Activo</span></td>
+                                <td>
+                                    <button class="btn-small view" onclick="viewClient('CLI-001')">👁️</button>
+                                    <button class="btn-small edit" onclick="editClient('CLI-001')">✏️</button>
+                                    <button class="btn-small history" onclick="clientHistory('CLI-001')">📋</button>
+                                </td>
+                            </tr>
+                            <tr data-type="pyme" data-country="colombia" data-status="active">
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">🏪</div>
+                                        <div>
+                                            <strong>TechCorp Ecuador</strong>
+                                            <div class="client-id">ID: CLI-002</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="type-badge pyme">🏪 PYME</span></td>
+                                <td>🇨🇴 Colombia</td>
+                                <td>
+                                    <div>📧 info@techcorp.co</div>
+                                    <div>📞 +57 1 987-6543</div>
+                                </td>
+                                <td><span class="shipment-count">23</span></td>
+                                <td><span class="status active">✅ Activo</span></td>
+                                <td>
+                                    <button class="btn-small view" onclick="viewClient('CLI-002')">👁️</button>
+                                    <button class="btn-small edit" onclick="editClient('CLI-002')">✏️</button>
+                                    <button class="btn-small history" onclick="clientHistory('CLI-002')">📋</button>
+                                </td>
+                            </tr>
+                            <tr data-type="individual" data-country="peru" data-status="pending">
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">👤</div>
+                                        <div>
+                                            <strong>Textiles Andinos Ltda.</strong>
+                                            <div class="client-id">ID: CLI-003</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="type-badge individual">👤 Individual</span></td>
+                                <td>🇵🇪 Perú</td>
+                                <td>
+                                    <div>📧 ventas@textiles.pe</div>
+                                    <div>📞 +51 1 456-7890</div>
+                                </td>
+                                <td><span class="shipment-count">12</span></td>
+                                <td><span class="status pending">⏳ Pendiente</span></td>
+                                <td>
+                                    <button class="btn-small view" onclick="viewClient('CLI-003')">👁️</button>
+                                    <button class="btn-small edit" onclick="editClient('CLI-003')">✏️</button>
+                                    <button class="btn-small history" onclick="clientHistory('CLI-003')">📋</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Vista de tarjetas -->
+                <div id="cardsView" class="clients-cards" style="display: none;">
+                    <div class="cards-grid" id="clientsCardsGrid">
+                        <!-- Las tarjetas se generarán dinámicamente -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/clients.js"></script>
+</body>
+</html>
+

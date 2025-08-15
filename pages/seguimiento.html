@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento - GlobalTrade Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html" class="breadcrumb-item">🏠 Dashboard</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">📦 Seguimiento</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header de la página -->
+            <section class="page-header">
+                <div class="page-title-section">
+                    <h1>📦 Seguimiento de Envíos</h1>
+                    <p>Rastrea tus envíos en tiempo real con información detallada</p>
+                </div>
+                <div class="page-actions">
+                    <button class="action-btn primary" onclick="showModal('newShipment')">
+                        <span>➕ Nuevo Envío</span>
+                    </button>
+                    <button class="action-btn secondary" onclick="exportTracking()">
+                        <span>📤 Exportar</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Buscador de tracking -->
+            <section class="tracking-search">
+                <div class="search-container">
+                    <h3>🔍 Rastrear Envío</h3>
+                    <div class="tracking-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>📋 Código de Seguimiento</label>
+                                <input type="text" id="trackingCode" placeholder="Ej: GTX-2024-001" maxlength="20">
+                            </div>
+                            <div class="input-group">
+                                <label>🚚 Tipo de Transporte</label>
+                                <select id="transportType">
+                                    <option value="">Seleccionar tipo</option>
+                                    <option value="maritime">🚢 Marítimo</option>
+                                    <option value="aerial">✈️ Aéreo</option>
+                                    <option value="terrestrial">🚛 Terrestre</option>
+                                    <option value="multimodal">🌐 Multimodal</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <button class="track-btn" onclick="trackShipment()">
+                                    <span id="trackBtnText">🎯 Rastrear</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resultado del tracking -->
+            <section class="tracking-result" id="trackingResult" style="display: none;">
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-header">
+                        <h3>📍 Estado del Envío</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    <div class="shipment-status" id="shipmentStatus"></div>
+                </div>
+            </section>
+
+            <!-- Mapa interactivo -->
+            <section class="tracking-map">
+                <div class="map-container">
+                    <h3>🗺️ Mapa de Ruta</h3>
+                    <div class="interactive-map" id="trackingMap">
+                        <div class="map-placeholder">
+                            <div class="map-icon">🌍</div>
+                            <p>Mapa interactivo de rutas</p>
+                            <p class="map-note">Selecciona un envío para ver su ruta en tiempo real</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de envíos activos -->
+            <section class="active-shipments">
+                <div class="section-header">
+                    <h3>📦 Envíos Activos</h3>
+                    <div class="filter-options">
+                        <select id="statusFilter" onchange="filterShipments()">
+                            <option value="">Todos los estados</option>
+                            <option value="in-transit">🚢 En tránsito</option>
+                            <option value="processing">📋 Procesando</option>
+                            <option value="customs">🏢 En aduanas</option>
+                            <option value="delivered">✅ Entregado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="shipments-grid">
+                    <div class="shipment-card" data-status="in-transit">
+                        <div class="card-header">
+                            <div class="shipment-code">GTX-2024-001</div>
+                            <div class="shipment-status in-transit">🚢 En tránsito</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span class="route-icon">📍</span>
+                                    <span>🇨🇳 Shanghai, China</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span class="route-icon">🎯</span>
+                                    <span>🇪🇨 Guayaquil, Ecuador</span>
+                                </div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>Importaciones Global S.A.</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 ETA:</span>
+                                    <span>15 Dic 2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>2,500 kg</span>
+                                </div>
+                            </div>
+                            <div class="progress-mini">
+                                <div class="progress-mini-bar">
+                                    <div class="progress-mini-fill" style="width: 65%;"></div>
+                                </div>
+                                <span class="progress-text">65% completado</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small track" onclick="trackSpecific('GTX-2024-001')">👁️ Ver detalles</button>
+                            <button class="btn-small edit" onclick="editShipment('GTX-2024-001')">✏️ Editar</button>
+                        </div>
+                    </div>
+
+                    <div class="shipment-card" data-status="processing">
+                        <div class="card-header">
+                            <div class="shipment-code">GTX-2024-003</div>
+                            <div class="shipment-status processing">📋 Procesando</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span class="route-icon">📍</span>
+                                    <span>🇵🇪 Lima, Perú</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span class="route-icon">🎯</span>
+                                    <span>🇨🇴 Bogotá, Colombia</span>
+                                </div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>Textiles Andinos Ltda.</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 ETA:</span>
+                                    <span>18 Dic 2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>1,200 kg</span>
+                                </div>
+                            </div>
+                            <div class="progress-mini">
+                                <div class="progress-mini-bar">
+                                    <div class="progress-mini-fill" style="width: 25%;"></div>
+                                </div>
+                                <span class="progress-text">25% completado</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small track" onclick="trackSpecific('GTX-2024-003')">👁️ Ver detalles</button>
+                            <button class="btn-small edit" onclick="editShipment('GTX-2024-003')">✏️ Editar</button>
+                        </div>
+                    </div>
+
+                    <div class="shipment-card" data-status="customs">
+                        <div class="card-header">
+                            <div class="shipment-code">GTX-2024-004</div>
+                            <div class="shipment-status customs">🏢 En aduanas</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="route-info">
+                                <div class="route-point">
+                                    <span class="route-icon">📍</span>
+                                    <span>🇺🇸 Miami, USA</span>
+                                </div>
+                                <div class="route-arrow">→</div>
+                                <div class="route-point">
+                                    <span class="route-icon">🎯</span>
+                                    <span>🇪🇨 Quito, Ecuador</span>
+                                </div>
+                            </div>
+                            <div class="shipment-details">
+                                <div class="detail-item">
+                                    <span>👥 Cliente:</span>
+                                    <span>TechCorp Ecuador</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>📅 ETA:</span>
+                                    <span>20 Dic 2024</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>⚖️ Peso:</span>
+                                    <span>850 kg</span>
+                                </div>
+                            </div>
+                            <div class="progress-mini">
+                                <div class="progress-mini-bar">
+                                    <div class="progress-mini-fill" style="width: 85%;"></div>
+                                </div>
+                                <span class="progress-text">85% completado</span>
+                            </div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-small track" onclick="trackSpecific('GTX-2024-004')">👁️ Ver detalles</button>
+                            <button class="btn-small edit" onclick="editShipment('GTX-2024-004')">✏️ Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/tracking.js"></script>
+</body>
+</html>
+

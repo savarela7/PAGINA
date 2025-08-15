@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - GlobalTrade Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html" class="breadcrumb-item">🏠 Dashboard</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">⚙️ Configuración</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header de la página -->
+            <section class="page-header">
+                <div class="page-title-section">
+                    <h1>⚙️ Configuración del Sistema</h1>
+                    <p>Personaliza tu experiencia y configura las preferencias del sistema</p>
+                </div>
+                <div class="page-actions">
+                    <button class="action-btn primary" onclick="saveAllSettings()">
+                        <span>💾 Guardar Todo</span>
+                    </button>
+                    <button class="action-btn secondary" onclick="resetSettings()">
+                        <span>🔄 Restaurar</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Navegación de configuración -->
+            <section class="config-navigation">
+                <div class="config-tabs">
+                    <button class="config-tab active" onclick="showConfigSection('profile')">
+                        <span class="tab-icon">👤</span>
+                        <span class="tab-text">Perfil</span>
+                    </button>
+                    <button class="config-tab" onclick="showConfigSection('system')">
+                        <span class="tab-icon">⚙️</span>
+                        <span class="tab-text">Sistema</span>
+                    </button>
+                    <button class="config-tab" onclick="showConfigSection('notifications')">
+                        <span class="tab-icon">🔔</span>
+                        <span class="tab-text">Notificaciones</span>
+                    </button>
+                    <button class="config-tab" onclick="showConfigSection('security')">
+                        <span class="tab-icon">🔒</span>
+                        <span class="tab-text">Seguridad</span>
+                    </button>
+                    <button class="config-tab" onclick="showConfigSection('integrations')">
+                        <span class="tab-icon">🔗</span>
+                        <span class="tab-text">Integraciones</span>
+                    </button>
+                    <button class="config-tab" onclick="showConfigSection('advanced')">
+                        <span class="tab-icon">🛠️</span>
+                        <span class="tab-text">Avanzado</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sección de Perfil -->
+            <section class="config-section active" id="profile-section">
+                <div class="section-header">
+                    <h3>👤 Perfil de Usuario</h3>
+                    <p>Información personal y configuración de cuenta</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>📋 Información Personal</h4>
+                        <form class="config-form">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Nombre completo</label>
+                                    <input type="text" id="fullName" value="Administrador del Sistema" placeholder="Tu nombre completo">
+                                </div>
+                                <div class="input-group">
+                                    <label>Email</label>
+                                    <input type="email" id="email" value="admin@globaltradepro.com" placeholder="tu@email.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Teléfono</label>
+                                    <input type="tel" id="phone" value="+593 2 123-4567" placeholder="+593 99 123 4567">
+                                </div>
+                                <div class="input-group">
+                                    <label>Cargo</label>
+                                    <input type="text" id="position" value="Administrador" placeholder="Tu cargo">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Empresa</label>
+                                    <input type="text" id="company" value="GlobalTrade Pro" placeholder="Nombre de la empresa">
+                                </div>
+                                <div class="input-group">
+                                    <label>Zona horaria</label>
+                                    <select id="timezone">
+                                        <option value="America/Guayaquil" selected>🇪🇨 Ecuador (GMT-5)</option>
+                                        <option value="America/Bogota">🇨🇴 Colombia (GMT-5)</option>
+                                        <option value="America/Lima">🇵🇪 Perú (GMT-5)</option>
+                                        <option value="America/Santiago">🇨🇱 Chile (GMT-3)</option>
+                                        <option value="America/Mexico_City">🇲🇽 México (GMT-6)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>🖼️ Avatar y Apariencia</h4>
+                        <div class="avatar-section">
+                            <div class="current-avatar">
+                                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Avatar actual" id="avatarPreview">
+                            </div>
+                            <div class="avatar-controls">
+                                <button class="btn-secondary" onclick="changeAvatar()">📷 Cambiar Avatar</button>
+                                <button class="btn-secondary" onclick="removeAvatar()">🗑️ Eliminar</button>
+                            </div>
+                        </div>
+                        <div class="theme-selection">
+                            <label>🎨 Tema de la interfaz</label>
+                            <div class="theme-options">
+                                <label class="theme-option">
+                                    <input type="radio" name="theme" value="dark" checked>
+                                    <div class="theme-preview dark">
+                                        <div class="theme-color" style="background: #0a0a0a;"></div>
+                                        <div class="theme-color" style="background: #00f5ff;"></div>
+                                        <div class="theme-color" style="background: #ff6b35;"></div>
+                                    </div>
+                                    <span>Oscuro</span>
+                                </label>
+                                <label class="theme-option">
+                                    <input type="radio" name="theme" value="light">
+                                    <div class="theme-preview light">
+                                        <div class="theme-color" style="background: #ffffff;"></div>
+                                        <div class="theme-color" style="background: #0066cc;"></div>
+                                        <div class="theme-color" style="background: #ff4500;"></div>
+                                    </div>
+                                    <span>Claro</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Sistema -->
+            <section class="config-section" id="system-section">
+                <div class="section-header">
+                    <h3>⚙️ Configuración del Sistema</h3>
+                    <p>Preferencias generales y configuración de la aplicación</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>🌐 Idioma y Región</h4>
+                        <form class="config-form">
+                            <div class="input-group">
+                                <label>Idioma de la interfaz</label>
+                                <select id="language">
+                                    <option value="es" selected>🇪🇸 Español</option>
+                                    <option value="en">🇺🇸 English</option>
+                                    <option value="pt">🇧🇷 Português</option>
+                                    <option value="fr">🇫🇷 Français</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Formato de fecha</label>
+                                <select id="dateFormat">
+                                    <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                    <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                    <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Moneda predeterminada</label>
+                                <select id="currency">
+                                    <option value="USD" selected>💵 USD - Dólar Americano</option>
+                                    <option value="EUR">💶 EUR - Euro</option>
+                                    <option value="COP">🇨🇴 COP - Peso Colombiano</option>
+                                    <option value="PEN">🇵🇪 PEN - Sol Peruano</option>
+                                    <option value="CLP">🇨🇱 CLP - Peso Chileno</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>📊 Dashboard y Visualización</h4>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">📈 Actualización automática</div>
+                                    <div class="setting-desc">Actualizar datos del dashboard automáticamente</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoRefresh" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🎯 Animaciones</div>
+                                    <div class="setting-desc">Mostrar animaciones en la interfaz</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="animations" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🔢 Mostrar números detallados</div>
+                                    <div class="setting-desc">Mostrar decimales en estadísticas</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="detailedNumbers">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Notificaciones -->
+            <section class="config-section" id="notifications-section">
+                <div class="section-header">
+                    <h3>🔔 Configuración de Notificaciones</h3>
+                    <p>Controla cómo y cuándo recibir notificaciones</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>📧 Notificaciones por Email</h4>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">📦 Nuevos envíos</div>
+                                    <div class="setting-desc">Notificar cuando se cree un nuevo envío</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNewShipments" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">✅ Entregas completadas</div>
+                                    <div class="setting-desc">Notificar cuando un envío sea entregado</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailDeliveries" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">💰 Nuevas cotizaciones</div>
+                                    <div class="setting-desc">Notificar sobre solicitudes de cotización</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailQuotes" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">👥 Nuevos clientes</div>
+                                    <div class="setting-desc">Notificar cuando se registre un nuevo cliente</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNewClients">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>🔔 Notificaciones Push</h4>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">📱 Notificaciones del navegador</div>
+                                    <div class="setting-desc">Mostrar notificaciones en el navegador</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="browserNotifications" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🔊 Sonidos</div>
+                                    <div class="setting-desc">Reproducir sonidos con las notificaciones</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="notificationSounds">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">⏰ Recordatorios</div>
+                                    <div class="setting-desc">Recordatorios de tareas pendientes</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="reminders" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Seguridad -->
+            <section class="config-section" id="security-section">
+                <div class="section-header">
+                    <h3>🔒 Configuración de Seguridad</h3>
+                    <p>Protege tu cuenta y datos con configuraciones de seguridad</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>🔑 Contraseña y Acceso</h4>
+                        <div class="security-actions">
+                            <button class="security-btn" onclick="changePassword()">
+                                <span class="btn-icon">🔐</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Cambiar Contraseña</div>
+                                    <div class="btn-desc">Actualiza tu contraseña de acceso</div>
+                                </div>
+                            </button>
+                            <button class="security-btn" onclick="setup2FA()">
+                                <span class="btn-icon">📱</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Autenticación de Dos Factores</div>
+                                    <div class="btn-desc">Configura 2FA para mayor seguridad</div>
+                                </div>
+                            </button>
+                            <button class="security-btn" onclick="viewSessions()">
+                                <span class="btn-icon">💻</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Sesiones Activas</div>
+                                    <div class="btn-desc">Ver y gestionar sesiones abiertas</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>🛡️ Configuración de Privacidad</h4>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🔒 Bloqueo automático</div>
+                                    <div class="setting-desc">Bloquear sesión después de inactividad</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoLock" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">📊 Registro de actividad</div>
+                                    <div class="setting-desc">Mantener registro de acciones del usuario</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="activityLog" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🌐 Acceso desde IP desconocidas</div>
+                                    <div class="setting-desc">Permitir acceso desde nuevas ubicaciones</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="unknownIP">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Integraciones -->
+            <section class="config-section" id="integrations-section">
+                <div class="section-header">
+                    <h3>🔗 Integraciones y APIs</h3>
+                    <p>Conecta con servicios externos y gestiona integraciones</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>🔌 Servicios Conectados</h4>
+                        <div class="integrations-list">
+                            <div class="integration-item">
+                                <div class="integration-info">
+                                    <div class="integration-icon">📧</div>
+                                    <div class="integration-details">
+                                        <div class="integration-name">Gmail</div>
+                                        <div class="integration-status connected">Conectado</div>
+                                    </div>
+                                </div>
+                                <button class="btn-small disconnect" onclick="disconnectService('gmail')">Desconectar</button>
+                            </div>
+                            <div class="integration-item">
+                                <div class="integration-info">
+                                    <div class="integration-icon">📊</div>
+                                    <div class="integration-details">
+                                        <div class="integration-name">Google Analytics</div>
+                                        <div class="integration-status connected">Conectado</div>
+                                    </div>
+                                </div>
+                                <button class="btn-small disconnect" onclick="disconnectService('analytics')">Desconectar</button>
+                            </div>
+                            <div class="integration-item">
+                                <div class="integration-info">
+                                    <div class="integration-icon">💬</div>
+                                    <div class="integration-details">
+                                        <div class="integration-name">Slack</div>
+                                        <div class="integration-status disconnected">Desconectado</div>
+                                    </div>
+                                </div>
+                                <button class="btn-small connect" onclick="connectService('slack')">Conectar</button>
+                            </div>
+                            <div class="integration-item">
+                                <div class="integration-info">
+                                    <div class="integration-icon">📱</div>
+                                    <div class="integration-details">
+                                        <div class="integration-name">WhatsApp Business</div>
+                                        <div class="integration-status disconnected">Desconectado</div>
+                                    </div>
+                                </div>
+                                <button class="btn-small connect" onclick="connectService('whatsapp')">Conectar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>🔑 Claves API</h4>
+                        <div class="api-keys">
+                            <div class="api-key-item">
+                                <div class="api-info">
+                                    <div class="api-name">API Key Principal</div>
+                                    <div class="api-key">gt_live_••••••••••••••••••••••••••••••••</div>
+                                </div>
+                                <div class="api-actions">
+                                    <button class="btn-small" onclick="copyApiKey('main')">📋 Copiar</button>
+                                    <button class="btn-small" onclick="regenerateApiKey('main')">🔄 Regenerar</button>
+                                </div>
+                            </div>
+                            <div class="api-key-item">
+                                <div class="api-info">
+                                    <div class="api-name">API Key de Pruebas</div>
+                                    <div class="api-key">gt_test_••••••••••••••••••••••••••••••••</div>
+                                </div>
+                                <div class="api-actions">
+                                    <button class="btn-small" onclick="copyApiKey('test')">📋 Copiar</button>
+                                    <button class="btn-small" onclick="regenerateApiKey('test')">🔄 Regenerar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="createApiKey()">➕ Crear Nueva API Key</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Avanzada -->
+            <section class="config-section" id="advanced-section">
+                <div class="section-header">
+                    <h3>🛠️ Configuración Avanzada</h3>
+                    <p>Configuraciones técnicas y opciones avanzadas del sistema</p>
+                </div>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>💾 Datos y Respaldo</h4>
+                        <div class="advanced-actions">
+                            <button class="advanced-btn" onclick="exportData()">
+                                <span class="btn-icon">📤</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Exportar Datos</div>
+                                    <div class="btn-desc">Descargar todos tus datos</div>
+                                </div>
+                            </button>
+                            <button class="advanced-btn" onclick="importData()">
+                                <span class="btn-icon">📥</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Importar Datos</div>
+                                    <div class="btn-desc">Cargar datos desde archivo</div>
+                                </div>
+                            </button>
+                            <button class="advanced-btn" onclick="createBackup()">
+                                <span class="btn-icon">💾</span>
+                                <div class="btn-content">
+                                    <div class="btn-title">Crear Respaldo</div>
+                                    <div class="btn-desc">Generar copia de seguridad</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="config-card">
+                        <h4>🔧 Configuración Técnica</h4>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">🐛 Modo de depuración</div>
+                                    <div class="setting-desc">Mostrar información técnica detallada</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="debugMode">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">⚡ Modo de rendimiento</div>
+                                    <div class="setting-desc">Optimizar para mejor rendimiento</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="performanceMode" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-title">📊 Analíticas avanzadas</div>
+                                    <div class="setting-desc">Recopilar métricas detalladas de uso</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="advancedAnalytics">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/config.js"></script>
+</body>
+</html>
+

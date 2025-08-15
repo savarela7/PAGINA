@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalTrade Pro - Sistema Integral de Comercio Internacional</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item active">
+                        <a href="index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <span class="breadcrumb-item active">🏠 Dashboard</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Sección de bienvenida -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-content">
+                        <h2>¡Bienvenido a GlobalTrade Pro!</h2>
+                        <p>Su plataforma integral para gestión de comercio internacional</p>
+                        <div class="quick-actions">
+                            <button class="action-btn primary" onclick="showModal('newShipment')">
+                                <span>📦 Nuevo Envío</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="showModal('newClient')">
+                                <span>👥 Nuevo Cliente</span>
+                            </button>
+                            <button class="action-btn tertiary" onclick="showModal('quickQuote')">
+                                <span>💰 Cotización Rápida</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="welcome-visual">
+                        <div class="globe-animation">🌐</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard de estadísticas -->
+            <section class="stats-dashboard">
+                <h3>Estadísticas en Tiempo Real</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="shipments">1,247</div>
+                            <div class="stat-label">Envíos Activos</div>
+                            <div class="stat-trend positive">+12% este mes</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="countries">89</div>
+                            <div class="stat-label">Países Atendidos</div>
+                            <div class="stat-trend positive">+3 nuevos</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="satisfaction">98.5%</div>
+                            <div class="stat-label">Satisfacción</div>
+                            <div class="stat-trend positive">+0.3%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="delivery">24h</div>
+                            <div class="stat-label">Tiempo Promedio</div>
+                            <div class="stat-trend negative">-2h mejorado</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de envíos recientes -->
+            <section class="recent-shipments">
+                <div class="section-header">
+                    <h3>Envíos Recientes</h3>
+                    <a href="pages/seguimiento.html" class="view-all-link">Ver todos →</a>
+                </div>
+                <div class="shipments-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Origen → Destino</th>
+                                <th>Estado</th>
+                                <th>ETA</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>GTX-2024-001</strong></td>
+                                <td>Importaciones Global S.A.</td>
+                                <td>🇨🇳 Shanghai → 🇪🇨 Guayaquil</td>
+                                <td><span class="status in-transit">🚢 En tránsito</span></td>
+                                <td>15 Dic 2024</td>
+                                <td>
+                                    <button class="btn-small track" onclick="trackShipment('GTX-2024-001')">👁️ Ver</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>GTX-2024-002</strong></td>
+                                <td>TechCorp Ecuador</td>
+                                <td>🇺🇸 Miami → 🇪🇨 Quito</td>
+                                <td><span class="status delivered">✅ Entregado</span></td>
+                                <td>Completado</td>
+                                <td>
+                                    <button class="btn-small delivered" onclick="viewReport('GTX-2024-002')">📄 Reporte</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>GTX-2024-003</strong></td>
+                                <td>Textiles Andinos Ltda.</td>
+                                <td>🇵🇪 Lima → 🇨🇴 Bogotá</td>
+                                <td><span class="status processing">📋 Procesando</span></td>
+                                <td>18 Dic 2024</td>
+                                <td>
+                                    <button class="btn-small process" onclick="updateStatus('GTX-2024-003')">✏️ Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Accesos rápidos -->
+            <section class="quick-access">
+                <h3>Accesos Rápidos</h3>
+                <div class="quick-grid">
+                    <a href="pages/seguimiento.html" class="quick-card">
+                        <div class="quick-icon">🔍</div>
+                        <div class="quick-title">Rastrear Envío</div>
+                        <div class="quick-desc">Seguimiento en tiempo real</div>
+                    </a>
+                    <a href="pages/cotizaciones.html" class="quick-card">
+                        <div class="quick-icon">🧮</div>
+                        <div class="quick-title">Calculadora</div>
+                        <div class="quick-desc">Costos de envío</div>
+                    </a>
+                    <a href="pages/clientes.html" class="quick-card">
+                        <div class="quick-icon">📋</div>
+                        <div class="quick-title">Directorio</div>
+                        <div class="quick-desc">Clientes y contactos</div>
+                    </a>
+                    <a href="pages/reportes.html" class="quick-card">
+                        <div class="quick-icon">📈</div>
+                        <div class="quick-title">Analytics</div>
+                        <div class="quick-desc">Reportes detallados</div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

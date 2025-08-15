@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - GlobalTrade Pro</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+</head>
+<body>
+    <!-- Header con navegación principal -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo">🌐</div>
+                <h1>GlobalTrade Pro</h1>
+                <span class="tagline">Sistema Integral de Comercio Internacional</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link" data-tooltip="Panel principal con estadísticas y resumen">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="clientes.html" class="nav-link" data-tooltip="Gestión completa de clientes y contactos">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Clientes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="seguimiento.html" class="nav-link" data-tooltip="Tracking en tiempo real de envíos">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-text">Seguimiento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cotizaciones.html" class="nav-link" data-tooltip="Calculadora de costos y cotizaciones">
+                            <span class="nav-icon">💰</span>
+                            <span class="nav-text">Cotizaciones</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="reportes.html" class="nav-link" data-tooltip="Reportes y análisis de rendimiento">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="configuracion.html" class="nav-link" data-tooltip="Configuración del sistema y usuario">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div class="notifications">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300f5ff'/><text x='50' y='60' text-anchor='middle' font-size='40' fill='white'>👤</text></svg>" alt="Usuario" class="user-avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="user-dropdown">▼</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="../index.html" class="breadcrumb-item">🏠 Dashboard</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-item active">📊 Reportes</span>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header de la página -->
+            <section class="page-header">
+                <div class="page-title-section">
+                    <h1>📊 Reportes y Analytics</h1>
+                    <p>Análisis detallado del rendimiento y estadísticas del negocio</p>
+                </div>
+                <div class="page-actions">
+                    <button class="action-btn primary" onclick="generateReport()">
+                        <span>📄 Generar Reporte</span>
+                    </button>
+                    <button class="action-btn secondary" onclick="exportData()">
+                        <span>📤 Exportar Datos</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Filtros de período -->
+            <section class="period-filters">
+                <div class="filters-container">
+                    <h3>📅 Período de Análisis</h3>
+                    <div class="filter-options">
+                        <div class="period-buttons">
+                            <button class="period-btn active" onclick="setPeriod('today')">Hoy</button>
+                            <button class="period-btn" onclick="setPeriod('week')">Esta Semana</button>
+                            <button class="period-btn" onclick="setPeriod('month')">Este Mes</button>
+                            <button class="period-btn" onclick="setPeriod('quarter')">Trimestre</button>
+                            <button class="period-btn" onclick="setPeriod('year')">Año</button>
+                        </div>
+                        <div class="custom-range">
+                            <input type="date" id="startDate" onchange="updateCharts()">
+                            <span>hasta</span>
+                            <input type="date" id="endDate" onchange="updateCharts()">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KPIs principales -->
+            <section class="kpi-dashboard">
+                <h3>📈 Indicadores Clave de Rendimiento</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="totalRevenue">$2,847,350</div>
+                            <div class="kpi-label">Ingresos Totales</div>
+                            <div class="kpi-change positive">+12.5% vs mes anterior</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">📦</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="totalShipments">1,247</div>
+                            <div class="kpi-label">Envíos Procesados</div>
+                            <div class="kpi-change positive">+8.3% vs mes anterior</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">👥</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="activeClients">247</div>
+                            <div class="kpi-label">Clientes Activos</div>
+                            <div class="kpi-change positive">+15 nuevos</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">⭐</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="satisfaction">98.5%</div>
+                            <div class="kpi-label">Satisfacción</div>
+                            <div class="kpi-change positive">+0.3% mejora</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gráficos principales -->
+            <section class="charts-section">
+                <div class="charts-grid">
+                    <!-- Gráfico de ingresos -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4>💰 Ingresos por Mes</h4>
+                            <div class="chart-controls">
+                                <select onchange="updateRevenueChart(this.value)">
+                                    <option value="monthly">Mensual</option>
+                                    <option value="weekly">Semanal</option>
+                                    <option value="daily">Diario</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-content">
+                            <canvas id="revenueChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de envíos por tipo -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4>🚚 Envíos por Tipo de Transporte</h4>
+                        </div>
+                        <div class="chart-content">
+                            <canvas id="transportChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de países -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4>🌍 Top Países de Destino</h4>
+                        </div>
+                        <div class="chart-content">
+                            <canvas id="countriesChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de satisfacción -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h4>⭐ Evolución de Satisfacción</h4>
+                        </div>
+                        <div class="chart-content">
+                            <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Análisis detallado -->
+            <section class="detailed-analysis">
+                <div class="analysis-grid">
+                    <!-- Top clientes -->
+                    <div class="analysis-card">
+                        <h4>🏆 Top 10 Clientes</h4>
+                        <div class="ranking-list">
+                            <div class="ranking-item">
+                                <div class="rank">1</div>
+                                <div class="client-info">
+                                    <div class="client-name">Importaciones Global S.A.</div>
+                                    <div class="client-stats">47 envíos • $125,340</div>
+                                </div>
+                                <div class="client-score">98.5%</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="rank">2</div>
+                                <div class="client-info">
+                                    <div class="client-name">TechCorp Ecuador</div>
+                                    <div class="client-stats">34 envíos • $89,250</div>
+                                </div>
+                                <div class="client-score">97.2%</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="rank">3</div>
+                                <div class="client-info">
+                                    <div class="client-name">Electrónicos del Futuro</div>
+                                    <div class="client-stats">28 envíos • $76,890</div>
+                                </div>
+                                <div class="client-score">96.8%</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="rank">4</div>
+                                <div class="client-info">
+                                    <div class="client-name">Textiles Andinos Ltda.</div>
+                                    <div class="client-stats">23 envíos • $65,420</div>
+                                </div>
+                                <div class="client-score">95.9%</div>
+                            </div>
+                            <div class="ranking-item">
+                                <div class="rank">5</div>
+                                <div class="client-info">
+                                    <div class="client-name">Distribuidora Norte</div>
+                                    <div class="client-stats">19 envíos • $54,780</div>
+                                </div>
+                                <div class="client-score">94.7%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rutas más utilizadas -->
+                    <div class="analysis-card">
+                        <h4>🗺️ Rutas Más Utilizadas</h4>
+                        <div class="routes-list">
+                            <div class="route-item">
+                                <div class="route-info">
+                                    <div class="route-path">🇨🇳 Shanghai → 🇪🇨 Guayaquil</div>
+                                    <div class="route-stats">156 envíos este mes</div>
+                                </div>
+                                <div class="route-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%;"></div>
+                                    </div>
+                                    <span>85%</span>
+                                </div>
+                            </div>
+                            <div class="route-item">
+                                <div class="route-info">
+                                    <div class="route-path">🇺🇸 Miami → 🇪🇨 Quito</div>
+                                    <div class="route-stats">134 envíos este mes</div>
+                                </div>
+                                <div class="route-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 73%;"></div>
+                                    </div>
+                                    <span>73%</span>
+                                </div>
+                            </div>
+                            <div class="route-item">
+                                <div class="route-info">
+                                    <div class="route-path">🇩🇪 Hamburg → 🇨🇴 Bogotá</div>
+                                    <div class="route-stats">98 envíos este mes</div>
+                                </div>
+                                <div class="route-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 53%;"></div>
+                                    </div>
+                                    <span>53%</span>
+                                </div>
+                            </div>
+                            <div class="route-item">
+                                <div class="route-info">
+                                    <div class="route-path">🇧🇷 São Paulo → 🇵🇪 Lima</div>
+                                    <div class="route-stats">76 envíos este mes</div>
+                                </div>
+                                <div class="route-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 41%;"></div>
+                                    </div>
+                                    <span>41%</span>
+                                </div>
+                            </div>
+                            <div class="route-item">
+                                <div class="route-info">
+                                    <div class="route-path">🇯🇵 Tokyo → 🇲🇽 Veracruz</div>
+                                    <div class="route-stats">52 envíos este mes</div>
+                                </div>
+                                <div class="route-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 28%;"></div>
+                                    </div>
+                                    <span>28%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas de rendimiento -->
+                    <div class="analysis-card">
+                        <h4>⚡ Métricas de Rendimiento</h4>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="metric-icon">⏱️</div>
+                                <div class="metric-content">
+                                    <div class="metric-value">24.5h</div>
+                                    <div class="metric-label">Tiempo Promedio</div>
+                                    <div class="metric-change negative">-2h mejora</div>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-icon">✅</div>
+                                <div class="metric-content">
+                                    <div class="metric-value">99.2%</div>
+                                    <div class="metric-label">Entregas Exitosas</div>
+                                    <div class="metric-change positive">+0.5%</div>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-icon">📞</div>
+                                <div class="metric-content">
+                                    <div class="metric-value">4.8/5</div>
+                                    <div class="metric-label">Atención Cliente</div>
+                                    <div class="metric-change positive">+0.2</div>
+                                </div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="metric-icon">💸</div>
+                                <div class="metric-content">
+                                    <div class="metric-value">$2,340</div>
+                                    <div class="metric-label">Ticket Promedio</div>
+                                    <div class="metric-change positive">+$180</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reportes predefinidos -->
+            <section class="predefined-reports">
+                <h3>📋 Reportes Predefinidos</h3>
+                <div class="reports-grid">
+                    <div class="report-card" onclick="generatePredefinedReport('monthly')">
+                        <div class="report-icon">📅</div>
+                        <div class="report-content">
+                            <h4>Reporte Mensual</h4>
+                            <p>Resumen completo del mes actual con todas las métricas</p>
+                            <div class="report-meta">
+                                <span>📄 15 páginas</span>
+                                <span>⏱️ 2 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card" onclick="generatePredefinedReport('clients')">
+                        <div class="report-icon">👥</div>
+                        <div class="report-content">
+                            <h4>Análisis de Clientes</h4>
+                            <p>Comportamiento y rendimiento de la cartera de clientes</p>
+                            <div class="report-meta">
+                                <span>📄 12 páginas</span>
+                                <span>⏱️ 1.5 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card" onclick="generatePredefinedReport('financial')">
+                        <div class="report-icon">💰</div>
+                        <div class="report-content">
+                            <h4>Reporte Financiero</h4>
+                            <p>Análisis detallado de ingresos, costos y rentabilidad</p>
+                            <div class="report-meta">
+                                <span>📄 20 páginas</span>
+                                <span>⏱️ 3 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="report-card" onclick="generatePredefinedReport('operations')">
+                        <div class="report-icon">⚙️</div>
+                        <div class="report-content">
+                            <h4>Reporte Operacional</h4>
+                            <p>Eficiencia operativa y métricas de rendimiento</p>
+                            <div class="report-meta">
+                                <span>📄 18 páginas</span>
+                                <span>⏱️ 2.5 min</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GlobalTrade Pro</h4>
+                    <p>Conectando el mundo a través del comercio internacional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📧 info@globaltradepro.com</p>
+                    <p>📞 +593 2 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte 24/7</h4>
+                    <p>🌐 www.globaltradepro.com</p>
+                    <p>💬 Chat en vivo disponible</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GlobalTrade Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Partículas animadas -->
+    <div id="particles"></div>
+
+    <!-- Modal principal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Título</h2>
+            <div id="modalBody">Contenido del modal</div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/reports.js"></script>
+</body>
+</html>
+
